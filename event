@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+<title>자산 · 연금 리모델링</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+:root{
+    --bg:#000;
+    --card:#0e0e0e;
+    --line:#1a1a1a;
+    --neon:#d4ff00;
+    --neon-dark:#b8cc00;
+    --white:#fff;
+    --gray:#9a9a9a;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Pretendard',sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--white);
+    line-height:1.5;
+    overflow-x:hidden;
+    word-break:keep-all;
+}
+
+.mobile-container{
+    max-width:480px;
+    margin:0 auto;
+    padding:0 15px;
+    padding-bottom:140px;
+}
+
+section{
+    padding:55px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.highlight{
+    color:var(--neon);
+    font-weight:900;
+}
+
+/* 헤더 */
+
+.header{
+    padding-top:70px;
+    text-align:center;
+}
+
+.sub-title{
+    color:var(--neon);
+    font-size:.85rem;
+    letter-spacing:2px;
+    margin-bottom:10px;
+    display:block;
+    font-weight:800;
+}
+
+.header h1{
+    font-size:2.1rem;
+    line-height:1.3;
+    margin-bottom:18px;
+}
+
+.hero-desc{
+    color:var(--gray);
+    font-size:1rem;
+}
+
+/* 카드 */
+
+.card{
+    background:var(--card);
+    border-left:4px solid var(--neon);
+    padding:22px;
+    border-radius:14px;
+    margin-top:15px;
+}
+
+.card h3{
+    font-size:1.05rem;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:var(--gray);
+    font-size:.92rem;
+}
+
+/* 전문가 */
+
+.profile-section{
+    background:linear-gradient(180deg,#111 0%, #000 100%);
+    border-radius:18px;
+    text-align:center;
+    padding:35px 20px;
+}
+
+.label-neon{
+    color:var(--neon);
+    letter-spacing:2px;
+    font-size:.75rem;
+    display:block;
+    margin-bottom:10px;
+}
+
+.profile-section h2{
+    font-size:1.5rem;
+}
+
+.profile-section p{
+    color:var(--gray);
+    font-size:.9rem;
+    margin-top:10px;
+}
+
+.spec-tags{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+}
+
+.tag{
+    background:#1a1a1a;
+    border:1px solid #222;
+    padding:7px 12px;
+    border-radius:50px;
+    font-size:.75rem;
+}
+
+/* 혜택 */
+
+.benefit-list{
+    list-style:none;
+    margin-top:30px;
+}
+
+.benefit-item{
+    display:flex;
+    align-items:flex-start;
+    margin-bottom:25px;
+}
+
+.benefit-item i{
+    color:var(--neon);
+    margin-right:15px;
+    font-size:1.2rem;
+    margin-top:4px;
+}
+
+.benefit-item strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.benefit-item p{
+    color:var(--gray);
+    font-size:.88rem;
+}
+
+/* 그래프 */
+
+.chart-section{
+    text-align:center;
+}
+
+.chart-section h2{
+    font-size:1.4rem;
+}
+
+.chart-section p{
+    margin-top:18px;
+    color:var(--gray);
+    font-size:.9rem;
+}
+
+.chart-section svg{
+    width:100%;
+    max-width:320px;
+    margin-top:25px;
+}
+
+/* 비교 테이블 */
+
+.compare-table{
+    background:var(--card);
+    border-radius:15px;
+    overflow:hidden;
+    margin-top:25px;
+}
+
+.compare-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    text-align:center;
+    padding:15px 10px;
+    border-bottom:1px solid var(--line);
+    font-size:.9rem;
+}
+
+.compare-row.head{
+    background:#171717;
+    font-weight:800;
+}
+
+/* 타임라인 */
+
+.timeline{
+    margin-top:30px;
+}
+
+.timeline-item{
+    display:flex;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:28px;
+}
+
+.timeline-item span{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--neon);
+    color:#000;
+    font-weight:900;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.timeline-item strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.timeline-item p{
+    color:var(--gray);
+    font-size:.88rem;
+}
+
+/* 신청 박스 */
+
+.apply-box{
+    background:var(--card);
+    border:2px solid var(--neon);
+    border-radius:22px;
+    padding:30px 22px;
+    box-shadow:0 10px 30px rgba(212,255,0,.08);
+    text-align:center;
+}
+
+.apply-box h2{
+    color:var(--neon);
+    margin-bottom:18px;
+    font-size:1.5rem;
+}
+
+.form-guide{
+    color:#888;
+    font-size:.88rem;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+/* CTA */
+
+.sticky-cta{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:480px;
+    padding:20px 15px 30px;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 0%, rgba(0,0,0,1) 30%);
+    z-index:999;
+    backdrop-filter:blur(5px);
+}
+
+.cta-btn{
+    width:100%;
+    display:block;
+    border:none;
+    background:var(--neon);
+    color:#000;
+    text-decoration:none;
+    text-align:center;
+    padding:18px;
+    border-radius:14px;
+    font-size:1.05rem;
+    font-weight:900;
+    transition:.2s;
+    box-shadow:0 10px 20px rgba(212,255,0,.2);
+}
+
+.cta-btn:active{
+    transform:scale(.98);
+    background:var(--neon-dark);
+}
+
+/* footer */
+
+.footer{
+    text-align:center;
+    color:#444;
+    font-size:.72rem;
+    padding-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="mobile-container">
+
+<header class="header">
+
+<span class="sub-title">
+20~40대 자산 · 연금 리모델링
+</span>
+
+<h1>
+국민연금만으로<br>
+정말 노후 준비가<br>
+<span class="highlight">가능할까요?</span>
+</h1>
+
+<p class="hero-desc">
+보험 · 연금 · 현금흐름 구조를 재설계해<br>
+지금과 노후를 함께 준비합니다.
+</p>
+
+</header>
+
+<section>
+
+<div class="card">
+<h3>"적금만으론 부족한 건 알지만..."</h3>
+<p>
+투자는 어렵고 보험은 복잡한 현실.<br>
+불필요한 지출부터 정리해드립니다.
+</p>
+</div>
+
+<div class="card">
+<h3>"국민연금만 믿어도 괜찮을까?"</h3>
+<p>
+노후 준비는 필요하지만 무엇부터 해야 할지 막막한 분들을 위해 현실적인 자산 흐름을 함께 설계합니다.
+</p>
+</div>
+
+<div class="card">
+<h3>"지인 추천 보험, 진짜 괜찮을까?"</h3>
+<p>
+매달 나가는 보험료를 단순 지출이 아닌 ‘자산 구조’ 관점으로 다시 분석합니다.
+</p>
+</div>
+
+</section>
+
+<section class="profile-section">
+
+<span class="label-neon">
+FINANCIAL SPECIALIST
+</span>
+
+<h2>
+검증된 전문가의<br>
+<span class="highlight">직접 설계</span>
+</h2>
+
+<p>
+단순 보험 판매가 아닌<br>
+삶 전체의 자산 흐름을 설계합니다.
+</p>
+
+<div class="spec-tags">
+<span class="tag">손해보험 자격</span>
+<span class="tag">생명보험 자격</span>
+<span class="tag">변액보험 자격</span>
+</div>
+
+</section>
+
+<section>
+
+<h2 style="text-align:center; font-size:1.4rem;">
+지금 신청 시<br>
+<span class="highlight">무료 제공</span>
+</h2>
+
+<ul class="benefit-list">
+
+<li class="benefit-item">
+<i class="fas fa-search-dollar"></i>
+<div>
+<strong>숨은 지출 분석</strong>
+<p>
+매달 새어나가는 고정 지출 체크
+</p>
+</div>
+</li>
+
+<li class="benefit-item">
+<i class="fas fa-chart-pie"></i>
+<div>
+<strong>연령별 맞춤 자산 포트폴리오</strong>
+<p>
+노후 · 연금 · 현금흐름까지 고려한 자산 설계
+</p>
+</div>
+</li>
+
+<li class="benefit-item">
+<i class="fas fa-comments"></i>
+<div>
+<strong>1:1 실시간 코칭</strong>
+<p>
+궁금할 때 언제든 물어보는 파트너
+</p>
+</div>
+</li>
+
+</ul>
+
+</section>
+
+<section class="chart-section">
+
+<h2>
+같은 월급이어도<br>
+<span class="highlight">자산 흐름</span>은 달라집니다
+</h2>
+
+<svg viewBox="0 0 300 180">
+
+<polyline
+fill="none"
+stroke="#444"
+stroke-width="4"
+points="10,140 70,132 130,128 190,126 250,124"
+/>
+
+<polyline
+fill="none"
+stroke="#d4ff00"
+stroke-width="5"
+points="10,140 70,120 130,90 190,60 250,25"
+/>
+
+<circle cx="250" cy="25" r="6" fill="#d4ff00"/>
+
+</svg>
+
+<p>
+단순 절약이 아닌<br>
+돈이 남는 구조를 만드는 것이 핵심입니다.
+</p>
+
+</section>
+
+<section>
+
+<h2 style="text-align:center; font-size:1.4rem;">
+리모델링 전 / 후 비교
+</h2>
+
+<div class="compare-table">
+
+<div class="compare-row head">
+<div>항목</div>
+<div>Before</div>
+<div>After</div>
+</div>
+
+<div class="compare-row">
+<div>월 보험료</div>
+<div>38만원</div>
+<div class="highlight">24만원</div>
+</div>
+
+<div class="compare-row">
+<div>저축 가능 금액</div>
+<div>20만원</div>
+<div class="highlight">60만원</div>
+</div>
+
+<div class="compare-row">
+<div>노후 준비</div>
+<div>국민연금만 의존</div>
+<div class="highlight">개인 연금 구조 확보</div>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 style="text-align:center; font-size:1.4rem;">
+실제 상담 사례
+</h2>
+
+<div class="card">
+<h3>29세 직장인 여성</h3>
+<p>
+월 보험료 42만원 → 25만원 조정<br>
+매달 저축 가능 금액 +37만원 확보
+</p>
+</div>
+
+<div class="card">
+<h3>신혼부부 사례</h3>
+<p>
+중복 보장 정리 후<br>
+결혼 자금 저축 구조 세팅 완료
+</p>
+</div>
+
+<div class="card">
+<h3>43세 자영업자</h3>
+<p>
+불필요한 보험료 정리 후<br>
+개인 연금 준비 구조 세팅 완료
+</p>
+</div>
+
+</section>
+
+<section>
+
+<h2 style="text-align:center; font-size:1.4rem;">
+진행 프로세스
+</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<span>01</span>
+<div>
+<strong>무료 신청</strong>
+<p>
+간단한 정보 입력
+</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<span>02</span>
+<div>
+<strong>현재 구조 분석</strong>
+<p>
+보험 · 소비 · 저축 · 연금 흐름 체크
+</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<span>03</span>
+<div>
+<strong>맞춤 리포트 제공</strong>
+<p>
+현금흐름 및 개선 포인트 정리
+</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<span>04</span>
+<div>
+<strong>사후 관리</strong>
+<p>
+지속적인 자산 흐름 및 연금 관리 코칭
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section style="border-bottom:none;">
+
+<div class="apply-box" id="apply">
+
+<h2>
+무료 자산 리포트 신청
+</h2>
+
+<p class="form-guide">
+현재 소비 · 보험 · 연금 흐름을 분석해<br>
+맞춤 자산 리포트를 제공해드립니다.<br><br>
+
+무리한 가입 권유 없이<br>
+현재 상황 기준으로만 안내드립니다.
+</p>
+
+<a href="https://forms.gle/ynuVqb1mbEDhWHqGA"
+target="_blank"
+class="cta-btn">
+
+무료 리포트 신청하기
+
+</a>
+
+</div>
+
+<footer class="footer">
+상담 가능 시간<br>
+평일 10:00 ~ 17:00 / 주말 09:00 ~ 13:00
+</footer>
+
+</section>
+
+</div>
+
+<div class="sticky-cta">
+
+<a href="https://forms.gle/ynuVqb1mbEDhWHqGA"
+target="_blank"
+class="cta-btn">
+
+내 자산 흐름 진단받기
+
+</a>
+
+</div>
+
+</body>
+</html>
+
